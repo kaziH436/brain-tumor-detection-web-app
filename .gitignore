@@ -1,0 +1,63 @@
+# Python virtual environment
+.venv/
+venv/
+ENV/
+
+# Python compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# VS Code settings
+.vscode/
+*.code-workspace
+
+# Project specific
+predictions.db
+static/assets/model.weights.bin
+uploads/*
+!uploads/.gitkeep
+
+# Local development settings
+.env
+.env.local
+.env.*.local
+
+# Log files
+*.log
+logs/
+log/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Test coverage
+.coverage
+htmlcov/
+.pytest_cache/
+coverage.xml
+*.cover
+
+# Database
+*.db
+*.sqlite3
+*.sqlite
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
+
+# IDE specific files
+.idea/
+*.swp
+*.swo
+.vscode/
+*.sublime-workspace
+*.sublime-project
