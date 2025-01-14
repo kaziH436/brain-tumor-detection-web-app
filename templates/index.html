@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brain Tumor Detection - Teachable Machine</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Brain Tumor Detection - Teachable Machine</h1>
+        
+        <!-- Start webcam button -->
+        <div class="buttons">
+            <button type="button" id="start-webcam-btn" onclick="toggleWebcam()">Start Webcam</button>
+        </div>
+
+        <!-- Take a picture button -->
+        <div class="buttons">
+            <button type="button" onclick="takePicture()">Take a Picture</button>
+        </div>
+
+        <!-- Display webcam feed -->
+        <div id="webcam-container" class="video-container"></div>
+
+        <!-- Display prediction label -->
+        <div id="label-container" class="label-container"></div>
+
+        <!-- Show previous predictions -->
+        <div class="buttons">
+            <button type="button" onclick="showPreviousPredictions()">Show Previous Predictions</button>
+        </div>
+    </div>
+
+    <!-- Predictions section (hidden by default) -->
+    <div id="predictions-container" class="container" style="display: none;">
+        <h1>Previous Predictions</h1>
+        <div id="previous-predictions"></div>
+        <div class="buttons">
+            <button type="button" onclick="goBack()">Return to Webcam</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+    <script>
+        // Function to show previous predictions
+        async function showPreviousPredictions() {
+            const response = await fetch('/predictions');
+            const predictions = await response.json();
+
+            const previousPredictionsContainer = document.getElementById('previous-predictions');
+            previousPredictionsContainer.innerHTML = '';  // Clear any previous content
+
+            predictions.forEach(prediction => {
+                const imageElement = document.createElement('img');
+                imageElement.src = `{{ url_for('static', filename='uploads/') }}${prediction[1]}`;
+                imageElement.alt = prediction[2];
+
+                const tumorTypeElement = document.createElement('p');
+                tumorTypeElement.innerText = `Tumor Type: ${prediction[2]}`;
+
+                const predictionElement = document.createElement('div');
+                predictionElement.appendChild(imageElement);
+                predictionElement.appendChild(tumorTypeElement);
+
+                previousPredictionsContainer.appendChild(predictionElement);
+            });
+
+            // Toggle visibility
+            document.getElementById('predictions-container').style.display = 'block';
+            document.querySelector('.container').style.display = 'none';
+        }
+
+        // Function to go back to webcam view
+        function goBack() {
+            document.getElementById('predictions-container').style.display = 'none';
+            document.querySelector('.container').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
