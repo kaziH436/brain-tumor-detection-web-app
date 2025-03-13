@@ -13,5 +13,7 @@ Dependencies:
 - for Flask backend:
     -  pip install flask
     -  pip install flask-cors
+    -  pip install pillow
+
 
                   
