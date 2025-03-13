@@ -7,3 +7,11 @@ Key features include:
 - Image classification: Uses TensorFlow to classify medical images of brain scans into one of four tumor categories.
 - Web interface: Allows users to upload medical images and view results through a clean and responsive design.
 - Database integration: Stores user and image data for later retrieval
+
+
+Dependencies: 
+- for Flask backend:
+    -  pip install flask
+    -  pip install flask-cors
+
+                  
