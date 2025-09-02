@@ -10,7 +10,7 @@ Developed a tumor detection application that classifies brain tumors into four c
 
 
 ## Dependencies
-- for Flask backend:
+- for Flask backend
     -  pip install flask
     -  pip install flask-cors
     -  pip install pillow
